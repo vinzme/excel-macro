@@ -1,0 +1,114 @@
+Remove macro message : Enabled / Disabled
+options - Trust Center - Trust Center Settings - Trusted Locations
+Add new location; check sub-folders
+
+Button - Insert Rounded Rectangle; Right-click - Assign macro;Macros in 
+This WorkBook; click outside and test
+
+Set Macro Password
+
+
+Sub Macro1()
+'
+' Macro1 Macro
+'
+
+'
+    'Range("A2").Select
+    UpdateTable
+End Sub
+
+Sub LoopRange()
+
+Dim rng As Range
+Dim row As Range
+Dim cell As Range
+
+Dim mstr1 As String
+Dim mstr2 As String
+
+Set rng = Range("A2:D10")
+'Range("A1").Select
+
+For Each row In rng.Rows
+    For Each cell In row.Cells
+        mstr1 = row.Cells(ActiveCell.row, 1)
+        mstr2 = row.Cells(ActiveCell.row, 4)
+    Next cell
+
+Next row
+
+
+End Sub
+
+Sub UpdateTable()
+
+Dim cnn As ADODB.Connection
+Dim uSQL As String
+Dim strWard As String
+Dim strDate As Date
+Dim strUser As String
+
+Dim rng As Range
+Dim row As Range
+Dim cell As Range
+
+Dim mstr1 As String
+Dim mstr2 As String
+
+Set rng = Range("A2:D20")
+Range("A1").Select
+
+
+
+'Set Connection string
+Set cnn = New Connection
+'cnnstr = "Data Source=localhost\SQLEXPRESS;Initial Catalog=mybookstore;Integrated Security=True; providerName='System.Data.SqlClient'"
+
+
+cnnstr = "Provider=SQLOLEDB;Data Source=localhost\SQLEXPRESS;Initial Catalog=mybookstore;Trusted_connection=yes;"
+
+
+'Connect and Run the SQL statement to update the reords.
+cnn.Open cnnstr
+
+
+For Each row In rng.Rows
+    For Each cell In row.Cells
+        mstr1 = row.Cells(ActiveCell.row, 1)
+        mstr2 = row.Cells(ActiveCell.row, 4)
+    Next cell
+    
+    If Trim(mstr1) <> "" Then
+        uSQL = "UPDATE dbo.titles set price = '880' WHERE title_id = '" & mstr1 & "' and title = '" & mstr2 & "'"
+    End If
+
+    cnn.Execute uSQL
+
+Next row
+
+
+
+'Dim row As Range
+'For Each row In [tbl_data].Rows
+    
+    
+'    uSQL = "UPDATE Breach_Test_Key SET [VAL_BREACH_REASON] = '" & (row.Columns(row.ListObject.ListColumns("VAL_BREACH_REASON").Index).Value) & _
+    "' ,[VAL_BREACH_DETAIL] = ' " & (row.Columns(row.ListObject.ListColumns("VAL_BREACH_DETAIL").Index).Value) & _
+    "' WHERE  [ID] = '" & (row.Columns(row.ListObject.ListColumns("ID").Index).Value) & "'"
+
+'cnn.Execute uSQL
+'Next
+
+cnn.Close
+Set cnn = Nothing
+
+MsgBox "Database is updated....", vbInformation + vbOKOnly
+
+Exit Sub
+
+End Sub
+
+
+
+
