@@ -1,0 +1,7 @@
+https://support.microsoft.com/en-us/help/142126/macro-to-loop-through-all-worksheets-in-a-workbook
+
+
+https://excelhelphq.com/how-to-loop-through-worksheets-in-a-workbook-in-excel-vba/
+
+
+https://www.microsofttraining.net/b/loop-through-excel-worksheets-and-workbooks/
