@@ -1,0 +1,57 @@
+Select CONVERT(date,'December 29, 2016',101)
+
+
+excelBook2 = new Excel.Workbook
+excelsheet = excelBook2.Worksheets(1)
+'I think it should already have 3 worksheets, thats why I set the worksheet to the first worksheet in the new workbook.
+
+'Add your changes
+Textbox1.Text = excelSheet.Range("A1").Text
+
+excelBook2.Close(SaveChanges:=True)
+
+
+
+https://support.microsoft.com/en-us/help/219151/how-to-automate-microsoft-excel-from-visual-basic
+
+
+https://stackoverflow.com/questions/18533142/how-to-get-the-name-of-each-sheets-of-excel-using-vb-ssis
+
+
+https://stackoverflow.com/questions/10495680/installation-of-vb6-on-windows-7-or-windows-8-or-windows-10
+
+
+https://support.microsoft.com/en-us/help/142126/macro-to-loop-through-all-worksheets-in-a-workbook
+
+
+https://excelhelphq.com/how-to-loop-through-worksheets-in-a-workbook-in-excel-vba/
+
+
+https://www.microsofttraining.net/b/loop-through-excel-worksheets-and-workbooks/
+
+
+
+-backup database
+
+
+
+-copy updated database to another program replica
+ program replica:
+   -with audit trail and flag field 
+   -flag field is about status if uploaded or not
+-make changes with the data
+-update live database
+-use actual program
+
+
+
+
+-printing:
+ -add Print button to Data Entry Tab
+  -Print will not work if there are no particulars or v_details
+  -Need an actual form with printed information
+
+
+
+
+ 
