@@ -1,0 +1,73 @@
+https://stackoverflow.com/questions/10495680/installation-of-vb6-on-windows-7-or-windows-8-or-windows-10
+
+
+
+x1 = xlSheet.Range("A11").Text
+y1 = xlSheet.Range("K11").Text
+
+
+Dim oApp As New Excel.Application
+Dim oWBa As Excel.Workbook = oApp.Workbooks.Open("c:\Test.XLS")
+Dim oWS As Excel.Worksheet = DirectCast(oWBa.Worksheets(1),
+Excel.Worksheet)
+oApp.Visible = False
+
+Dim oRng As Excel.Range
+oRng = oWS.Range("D6")
+MsgBox(oRng.Value)
+
+
+
+ Dim rdr As Excel.Range = oFindings.Range
+    For Each row As Excel.Range In rdr.Rows
+
+        'explicitly get the first cell as a range 
+        Dim aCell As Excel.Range = row.Cells(1, 1)
+
+        'explicity convert the value to String but don't use .String
+        Dim Account as string = CStr(aCell.Value2)
+
+        If Not String.IsNullOrEmpty(Account) Then
+
+            ' Do other stuff
+
+        End If
+
+    Next
+
+
+
+https://support.microsoft.com/en-us/help/142126/macro-to-loop-through-all-worksheets-in-a-workbook
+
+
+https://excelhelphq.com/how-to-loop-through-worksheets-in-a-workbook-in-excel-vba/
+
+
+https://www.microsofttraining.net/b/loop-through-excel-worksheets-and-workbooks/
+
+
+
+-backup database
+
+
+
+-copy updated database to another program replica
+ program replica:
+   -with audit trail and flag field 
+   -flag field is about status if uploaded or not
+-make changes with the data
+-update live database
+-use actual program
+
+
+
+
+-printing:
+ -add Print button to Data Entry Tab
+  -Print will not work if there are no particulars or v_details
+  -Need an actual form with printed information
+
+
+
+
+ 
