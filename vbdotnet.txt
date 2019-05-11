@@ -1,0 +1,87 @@
+Imports System
+Imports System.Data.SqlClient
+ 
+Class Hello
+    Shared Sub Main()
+        Dim conStr As String = "SERVER=(local);" _
+            & "DATABASE=master;" _
+            & "UID=sa;" _
+            & "PWD=P@ssW0rd"
+        Dim sqlStr As String = "SELECT 'Hello, ADO.NET World!' AS Message"
+ 
+        Dim con As SqlConnection = New SqlConnection(conStr)
+        Dim cmd As SqlCommand = New SqlCommand(sqlStr, con)
+        con.Open()
+        Dim reader As SqlDataReader = cmd.ExecuteReader()
+        While reader.Read()
+            Console.WriteLine( reader.GetName(0) )
+            Console.WriteLine( "---------------------" )
+            Console.WriteLine( reader(0) )
+        End While
+        reader.Close()
+        con.Close()
+    End Sub
+End Class
+
+
+
+Imports System.Data.SqlClient
+Imports System.Configuration.ConfigurationManager
+
+Public Class _Default
+    Inherits System.Web.UI.Page
+
+    Protected Sub Submit_Click(sender As Object, e As EventArgs) Handles Submit.Click
+        'User is a reserved word so must use []
+        'query find username and password in th db
+        Dim SQL = "SELECT Username " & _
+              "FROM [User] " & _
+              "WHERE Username = '" & Username.Text & "'" & _
+              "AND Password = '" & Password.Text & "'"
+        ' Connection String defined in Web.config from Tools - Connect to Database...
+        Using con As New SqlConnection(ConnectionStrings("ConnectionName").ConnectionString)
+            Try
+                ' dataadapter which execute the sql query on the connection
+                Dim dAdapter = New SqlDataAdapter(SQL, con)
+                ' table data structure that hold the result of the query
+                Dim dSet = New DataSet
+                dAdapter.Fill(dSet, "User")
+                'match found or not found
+                If dSet.Tables("User").Rows.Count > 0 Then
+                    MsgBox.Text = "Login!"
+                Else
+                    MsgBox.Text = "Try Again!"
+                End If
+            Catch ex As Exception
+                MsgBox.Text = "ERROR: " + ex.Message
+            End Try
+        End Using
+    End Sub
+
+End Class
+
+
+Imports System.Data.SqlClient
+Imports System.Configuration.ConfigurationManager
+
+Public Class Signup
+    Inherits System.Web.UI.Page
+
+    Protected Sub Submit_Click(sender As Object, e As EventArgs) Handles Submit.Click
+        'User & Password are reserved words so must use []
+        Dim SQL As String = "INSERT INTO [User] (Username, [Password]) " & _
+            "VALUES ('" & Username.Text & "','" & Password.Text & "')"
+        ' Connection String defined in Web.config from Tools - Connect to Database...
+        Using con As New SqlConnection(ConnectionStrings("ConnectionName").ConnectionString)
+            Dim cmd As New SqlCommand(SQL, con)
+            Try
+                con.Open()
+                cmd.ExecuteNonQuery()
+                con.Close()
+                MsgBox.Text = "Sign up Successful!"
+            Catch ex As Exception
+                MsgBox.Text = "ERROR: " + ex.Message
+            End Try
+        End Using
+    End Sub
+End Class
